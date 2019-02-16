@@ -1,0 +1,16 @@
+work_dir: /home/daniel/work/examparser/workdir
+output_dir: /home/daniel/work/examparser/results
+file: /home/daniel/Documents/enem/2016-2.pdf
+microdata: /home/daniel/Documents/enem/microdados_enem2016/DADOS/itens_prova_2016.csv
+amount_of_questions: 95
+one_column_pages:
+  - 24
+  - 27
+excluded_pages:
+  - 0
+  - 1
+  - 31
+edition: 2016
+variant: AZUL
+part: 2
+exam: ENEM
