@@ -1,6 +1,6 @@
 import os
 
-from pyPdf import PdfFileReader
+from PyPDF2 import PdfFileMerger, PdfFileReader, PdfFileWriter
 from shutil import copyfile
 
 from data import PDFManipulation, Vision
@@ -28,7 +28,7 @@ class QuestionSplitter:
         copyfile(pdf_input_path, current_pdf_path)
 
         # PDF Information
-        with open(pdf_input_path) as question_pdf_file:
+        with open(pdf_input_path, 'rb') as question_pdf_file:
             enem_pdf = PdfFileReader(question_pdf_file)
             num_of_pages = enem_pdf.numPages
             first_page = enem_pdf.getPage(0)
@@ -84,7 +84,7 @@ class QuestionSplitter:
                 # Crops below pattern
                 aux_upper = upper[0], upper[1] - 100
 
-                PDFManipulation.crop_and_output_pages(current_pdf_path, aux_pdf_path, 0, upper=aux_upper)
+                PDFManipulation.crop_and_output_pages(current_pdf_path, aux_pdf_path, [0], upper=aux_upper)
                 # Switches input pdf
                 current_pdf_path, aux_pdf_path = aux_pdf_path, current_pdf_path
 
@@ -98,7 +98,7 @@ class QuestionSplitter:
 
 
 def get_dimensions(pdf_path):
-    with open(pdf_path) as page_file:
+    with open(pdf_path, 'rb') as page_file:
         page_pdf = PdfFileReader(page_file)
         page = page_pdf.getPage(0)
         lower = (page.mediaBox.getLowerLeft_x(),
@@ -114,7 +114,7 @@ def _get_coordinates(pdf_page_path, img_path, pattern_path):
     if pattern_occurrence_y is None:
         return None, None
 
-    with open(pdf_page_path) as page_file:
+    with open(pdf_page_path, 'rb') as page_file:
         page_pdf = PdfFileReader(page_file)
         page = page_pdf.getPage(0)
         pdf_height = page.mediaBox.getUpperRight_y() - page.mediaBox.getLowerLeft_y()

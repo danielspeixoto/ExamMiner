@@ -1,5 +1,5 @@
-work_dir: /home/daniel/work/examparser/workdir
-output_dir: /home/daniel/work/examparser/results
+work_dir: /home/daniel/work/examoutput/workdir
+output_dir: /home/daniel/work/examoutput/results
 file: /home/daniel/Documents/enem/2016-2.pdf
 microdata: /home/daniel/Documents/enem/microdados_enem2016/DADOS/itens_prova_2016.csv
 amount_of_questions: 95

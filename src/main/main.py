@@ -6,7 +6,7 @@ from data.PreProcessor import PreProcessor
 from data.QuestionSplitter import QuestionSplitter
 from domain.Miner import Miner
 
-prov = YAMLConfigProvider("/home/daniel/work/enem-parser (copy 1)/src/test/res/config.yaml")
+prov = YAMLConfigProvider("/home/daniel/work/exam_parser/src/test/res/config.yaml")
 config = prov.get_config()
 
 preprocessor = PreProcessor(

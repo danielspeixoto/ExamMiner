@@ -1,7 +1,6 @@
 import os
 
-import pyPdf
-from pyPdf import PdfFileWriter
+from PyPDF2 import PdfFileReader, PdfFileWriter
 
 from data import PDFManipulation
 
@@ -28,8 +27,8 @@ class PreProcessor:
         return pages
 
     def pre_process(self, input_path: str, working_pdf: str):
-        with open(input_path) as input_pdf:
-            pdf_file = pyPdf.PdfFileReader(input_pdf)
+        with open(input_path, 'rb') as input_pdf:
+            pdf_file = PdfFileReader(input_pdf)
             all_pages = range(pdf_file.numPages)
 
             # Two-column page, gets left side
@@ -60,9 +59,9 @@ class PreProcessor:
         one_column_pages = 0
         two_column_pages = 0
 
-        left_column_pdf = pyPdf.PdfFileReader(open(self.left_column_pdf, "rb"))
-        right_column_pdf = pyPdf.PdfFileReader(open(self.right_column_pdf, "rb"))
-        one_column_pdf = pyPdf.PdfFileReader(open(self.one_column_pdf, "rb"))
+        left_column_pdf = PdfFileReader(open(self.left_column_pdf, "rb"))
+        right_column_pdf = PdfFileReader(open(self.right_column_pdf, "rb"))
+        one_column_pdf = PdfFileReader(open(self.one_column_pdf, "rb"))
         output = PdfFileWriter()
         for page_index in all_pages:
             if page_index in self.excluded_pages:

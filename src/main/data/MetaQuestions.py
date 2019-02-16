@@ -3,7 +3,7 @@ import os
 from typing import Tuple, Dict
 
 import pandas as pd
-from pyPdf2 import PdfFileWriter, PdfFileReader, PdfFileMerger
+from PyPDF2 import PdfFileMerger, PdfFileReader, PdfFileWriter
 
 from data import PDFManipulation
 from data.PDFManipulation import crop_page

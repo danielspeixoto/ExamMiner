@@ -1,6 +1,6 @@
 from typing import Tuple
 
-import pyPdf
+import PyPDF2
 from pdf2image import convert_from_path
 
 
@@ -32,25 +32,25 @@ def crop_all(pages: [int],
 
 def select_pages(input_path: str, page_numbers: [int]):
     pages = []
-    with open(input_path, "rb") as pdf:
-        pdf_reader = pyPdf.PdfFileReader(pdf)
-        for i in page_numbers:
-            page = pdf_reader.getPage(i)
-            pages.append(page)
+    pdf = open(input_path, "rb")
+    pdf_reader = PyPDF2.PdfFileReader(pdf)
+    for i in page_numbers:
+        page = pdf_reader.getPage(i)
+        pages.append(page)
     return pages
 
 
-def output_pages(pages: [int], output_path: str):
+def output_pages(pages, output_path: str):
     with open(output_path, "wb") as page_file:
-        output = pyPdf.PdfFileWriter()
+        output = PyPDF2.PdfFileWriter()
         for page in pages:
             output.addPage(page)
         output.write(page_file)
 
 
 def output_page_number(pdf_input_path: str, pdf_output: str, page_number: int):
-    page = select_pages(pdf_input_path, [page_number])
-    output_pages([page], pdf_output)
+    pages = select_pages(pdf_input_path, [page_number])
+    output_pages(pages, pdf_output)
 
 
 def crop_and_output_pages(input_path: str, output_path: str, page_numbers: [int],
