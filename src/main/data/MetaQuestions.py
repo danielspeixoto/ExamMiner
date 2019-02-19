@@ -122,14 +122,16 @@ class MetaQuestionsRepository:
                 meta = question.metadata_to_dict()
                 json.dump(meta, fp)
 
+            MetaQuestionsRepository._meta2pdf(question, folder)
+
     @staticmethod
     def _meta2pdf(question: MetaQuestion, output_path: str):
         i = 0
         os.makedirs(output_path, exist_ok=True)
         for part in question.portions.parts:
             MetaQuestionsRepository._portion2pdf(
-                part,
                 question.portions.pdf_file,
+                part,
                 output_path + "/" +
                 str(i) + ".pdf")
             i += 1
