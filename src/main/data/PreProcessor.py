@@ -11,6 +11,7 @@ class PreProcessor:
                  one_column_pages: [int],
                  excluded_pages: [int]):
 
+        os.makedirs(working_dir, exist_ok=True)
         self.working_dir = working_dir
         self.left_column_pdf = working_dir + "left.pdf"
         self.right_column_pdf = working_dir + "right.pdf"

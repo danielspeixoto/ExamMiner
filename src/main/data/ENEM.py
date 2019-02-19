@@ -32,11 +32,12 @@ class ENEMMetadataFormatter(MetadataFormatter):
                 question,
                 self.exam,
                 self.edition,
+                domain,
                 self.variant,
                 self.part,
                 number,
                 self._answer(i),
-                self.tags + domain
+                self.tags
             )
             metas.append(meta)
         return metas

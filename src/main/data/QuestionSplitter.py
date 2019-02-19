@@ -11,6 +11,7 @@ class QuestionSplitter:
 
     def __init__(self, working_dir, pattern_path):
         self.working_dir = working_dir + "/splitter/"
+        os.makedirs(self.working_dir, exist_ok=True)
         self.pattern_path = pattern_path
 
     def split(self, pdf_input_path) -> [QuestionPortions]:

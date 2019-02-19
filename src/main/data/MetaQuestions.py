@@ -71,6 +71,7 @@ class MetaQuestion:
                  portions: QuestionPortions,
                  exam: str,
                  edition: int,
+                 area: str,
                  variant: str,
                  part: int,
                  number: int,
@@ -80,6 +81,7 @@ class MetaQuestion:
         self.portions = portions
         self.exam = exam
         self.edition = edition
+        self.area = area
         self.variant = variant
         self.part = part
         self.number = number
@@ -90,11 +92,11 @@ class MetaQuestion:
         return {
             "exam": self.exam,
             "edition": self.edition,
+            "area": self.area,
             "variant": self.variant,
             "part": self.part,
             "number": self.number,
-            "answer": self.answer,
-            "tags": self.tags
+            "answer": self.answer
         }
 
 
@@ -114,14 +116,16 @@ class MetaQuestionsRepository:
             question = questions[i]
             folder = self.dir + "/" + str(i)
 
-            with open(folder + "/meta.json", 'wb') as fp:
-                json.dump(question.metadata_to_dict(), fp)
+            os.makedirs(folder, exist_ok=True)
+
+            with open(folder + "/meta.json", 'w') as fp:
+                meta = question.metadata_to_dict()
+                json.dump(meta, fp)
 
     @staticmethod
     def _meta2pdf(question: MetaQuestion, output_path: str):
         i = 0
-        if not os.path.exists(output_path):
-            os.mkdir(output_path)
+        os.makedirs(output_path, exist_ok=True)
         for part in question.portions.parts:
             MetaQuestionsRepository._portion2pdf(
                 part,
